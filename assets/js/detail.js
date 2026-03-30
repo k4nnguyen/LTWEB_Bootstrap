@@ -1,7 +1,13 @@
 // assets/js/detail.js
 import { coursesData } from "./modules/courses.js";
+import { addToCart, initCart } from "./modules/cart.js";
+import { initThemeToggle } from "./modules/theme.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Khởi tạo Theme & Cart chung cho trang detail
+  initThemeToggle();
+  initCart();
+
   // 1. Lấy ID từ URL
   const urlParams = new URLSearchParams(window.location.search);
   const idParam = urlParams.get("id");
@@ -29,8 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("bread-category").textContent = courseDetail.category;
     document.title = `${courseDetail.title} - AnKhoaHoc`;
 
-    // === BẮT ĐẦU PHẦN CODE MỚI THÊM ===
-
     // 1. Xử lý Thời lượng
     document.getElementById("detail-duration").textContent = courseDetail.duration || "Chưa cập nhật";
 
@@ -38,9 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const priceElement = document.getElementById("detail-price");
     if (courseDetail.price === 0) {
       priceElement.textContent = "Miễn phí";
-      priceElement.classList.replace("text-danger", "text-success"); // Đổi màu xanh cho chữ Miễn phí
+      priceElement.classList.replace("text-danger", "text-success");
     } else if (courseDetail.price > 0) {
-      // Hàm định dạng số tiền chuẩn Việt Nam
       const formattedPrice = new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(courseDetail.price);
       priceElement.textContent = formattedPrice;
       priceElement.classList.replace("text-success", "text-danger");
@@ -51,7 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // 3. Xử lý Render Syllabus (Danh sách nội dung học)
     const syllabusContainer = document.getElementById("detail-syllabus");
     if (courseDetail.syllabus && courseDetail.syllabus.length > 0) {
-      // Dùng map() sinh ra chuỗi HTML các thẻ <li>
       const syllabusHTML = courseDetail.syllabus
         .map(
           (item) => `
@@ -69,19 +71,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // === LOGIC XỬ LÝ NÚT THÊM VÀO GIỎ HÀNG ===
     const addToCartBtn = document.getElementById("addToCartBtn");
-    const cartToastElement = document.getElementById("cartToast");
-
-    if (addToCartBtn && cartToastElement) {
-      // Khởi tạo đối tượng Toast của Bootstrap
-      const toast = new bootstrap.Toast(cartToastElement);
-
+    if (addToCartBtn) {
       addToCartBtn.addEventListener("click", () => {
-        // Hiển thị thông báo màu xanh lá
-        toast.show();
-
-        // (Mở rộng sau này): Chỗ này bạn có thể viết thêm code
-        // lưu thông tin courseDetail vào localStorage để làm trang Giỏ hàng thật
-        // ví dụ: saveToCart(courseDetail.id);
+        addToCart(courseDetail.id); // Gọi hàm từ cart.js
       });
     }
   } else {

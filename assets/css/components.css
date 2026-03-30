@@ -156,3 +156,133 @@
 .chat-pop-animation .chat-toggle-btn {
   animation: chatPopUp 1s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
+
+/* ==============
+   DARK MODE 
+================= */
+[data-bs-theme="dark"] body,
+[data-bs-theme="dark"] .bg-light,
+[data-bs-theme="dark"] .bg-white {
+  background-color: #121212 !important; /* Đen nhám sang trọng */
+  color: #e0e0e0 !important;
+}
+
+/* Xử lý Card Khóa học (Neumorphism nền tối) */
+[data-bs-theme="dark"] .neumorphism-card {
+  background: #1e1e1e !important;
+  box-shadow:
+    6px 6px 12px #0c0c0c,
+    -6px -6px 12px #303030 !important;
+  color: #e0e0e0;
+}
+
+/* Xử lý chữ màu xám/đen bị chìm */
+[data-bs-theme="dark"] .text-dark {
+  color: #f8f9fa !important;
+}
+[data-bs-theme="dark"] .text-muted {
+  color: #a0a0a0 !important;
+}
+
+/* Xử lý Sidebar Menu */
+[data-bs-theme="dark"] .list-group-item {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  border-color: #333;
+}
+[data-bs-theme="dark"] .list-group-item:hover,
+[data-bs-theme="dark"] .list-group-item.active {
+  background-color: #2d2d2d;
+  color: #ee0979; /* Giữ màu nhấn thương hiệu */
+  border-left-color: #ee0979;
+}
+
+/* Xử lý Cửa sổ Chat & Offcanvas Giỏ hàng */
+[data-bs-theme="dark"] .chat-window,
+[data-bs-theme="dark"] .offcanvas,
+[data-bs-theme="dark"] .offcanvas-header,
+[data-bs-theme="dark"] .offcanvas-footer {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0;
+  border-color: #333 !important;
+}
+
+[data-bs-theme="dark"] .chat-footer {
+  background-color: #1e1e1e !important;
+  border-top: 1px solid #333 !important;
+}
+
+[data-bs-theme="dark"] .chat-footer input {
+  background-color: #2d2d2d !important;
+  color: #fff !important;
+}
+
+/* Fix màu nền của các Badge danh mục trên thẻ khóa học */
+[data-bs-theme="dark"] .badge.bg-info.text-dark,
+[data-bs-theme="dark"] .badge.bg-warning.text-dark {
+  color: #000 !important; /* Giữ chữ màu đen trên nền badge sáng để dễ đọc */
+}
+
+/* 1. Thêm độ trễ (Transition) để chuyển theme từ từ, không bị chớp mắt */
+* {
+  transition:
+    background-color 0.5s ease,
+    color 0.5s ease,
+    border-color 0.5s ease,
+    box-shadow 0.5s ease,
+    background 0.5s ease;
+}
+
+/* 2. Fix lỗi nút "Xem chi tiết" bị chìm (class btn-outline-dark) */
+[data-bs-theme="dark"] .btn-outline-dark {
+  color: #e0e0e0 !important; /* Đổi chữ thành trắng xám */
+  border-color: #666 !important; /* Viền xám nhạt cho tinh tế */
+}
+
+/* Hiệu ứng khi hover chuột vào nút trong chế độ Dark Mode */
+[data-bs-theme="dark"] .btn-outline-dark:hover {
+  background-color: #e0e0e0 !important;
+  color: #121212 !important; /* Chữ đen trên nền trắng xám */
+  border-color: #e0e0e0 !important;
+}
+
+/* 2. Sửa lỗi thẻ Card giữa bị kẹt màu Gradient ở chế độ Dark Mode */
+[data-bs-theme="dark"] .card {
+  /* Đổi từ background-color thành background để XÓA SẠCH mọi gradient inline */
+  background: #1e1e1e !important;
+  border-color: #333 !important;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Đảm bảo Footer của Card cũng đồng bộ màu và có đường kẻ ngang mờ */
+[data-bs-theme="dark"] .card-footer {
+  background-color: transparent !important;
+  border-top: 1px solid #333 !important;
+}
+
+/* Fix các icon nhỏ (đồng hồ, laptop) không bị chìm màu */
+[data-bs-theme="dark"] .card .text-primary {
+  color: #00b2ff !important; /* Làm sáng màu xanh dương lên một chút */
+}
+.review-card-special {
+  background-color: #fcf0f4; /* Màu hồng nhạt (solid) thay cho gradient */
+}
+
+[data-bs-theme="dark"] .review-card-special {
+  background-color: #1e1e1e !important; /* Chuyển về đen xám mượt mà trong Dark Mode */
+}
+
+/* 2. Ép màu Trắng cho toàn bộ thẻ Tiêu đề (Heading) và Tên người dùng trong Card */
+[data-bs-theme="dark"] .card h1,
+[data-bs-theme="dark"] .card h2,
+[data-bs-theme="dark"] .card h3,
+[data-bs-theme="dark"] .card h4,
+[data-bs-theme="dark"] .card h5,
+[data-bs-theme="dark"] .card h6 {
+  color: #f8f9fa !important; /* Trắng sáng */
+}
+
+/* 3. Đảm bảo chữ mô tả (text-muted) không bị tối thui */
+[data-bs-theme="dark"] .card .text-muted {
+  color: #a0a0a0 !important; /* Xám sáng */
+}

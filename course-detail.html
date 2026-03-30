@@ -22,7 +22,22 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link interactive-cursor" href="index.html">Quay lại Trang chủ</a></li>
+            <li class="nav-item"><a class="nav-link interactive-cursor" href="index.html">Trang chủ</a></li>
+            <li class="nav-item"><a class="nav-link interactive-cursor" href="index.html#courses">Khóa học</a></li>
+            <li class="nav-item"><a class="nav-link interactive-cursor" href="index.html#about">Giới thiệu</a></li>
+
+            <li class="nav-item d-flex align-items-center ms-lg-3">
+              <button class="btn btn-link nav-link text-white interactive-cursor p-0" id="themeToggleBtn" title="Giao diện Sáng/Tối">
+                <i class="bi bi-moon-fill fs-5" id="themeIcon"></i>
+              </button>
+            </li>
+
+            <li class="nav-item d-flex align-items-center ms-lg-3 mt-3 mt-lg-0">
+              <button class="btn btn-link nav-link text-white position-relative interactive-cursor p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+                <i class="bi bi-cart3 fs-5"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cartBadge" style="font-size: 0.6rem">0</span>
+              </button>
+            </li>
           </ul>
         </div>
       </div>
@@ -57,7 +72,7 @@
                 <button class="btn btn-primary btn-lg rounded-pill w-100 mb-3 custom-neumorphism-btn interactive-cursor" id="addToCartBtn">Đăng ký học ngay</button>
                 <p class="text-muted small mb-0"><i class="bi bi-shield-check me-1 text-success"></i> Cam kết chất lượng chuẩn kỹ sư</p>
               </div>
-              <div class="card-footer bg-white border-top-0 p-4 pt-0">
+              <div class="card-footer bg-white p-4 border-top bg-transparent">
                 <ul class="list-unstyled mb-0 small text-muted">
                   <li class="mb-3"><i class="bi bi-clock me-2 text-primary"></i> Thời lượng: <span id="detail-duration" class="fw-semibold text-dark">...</span></li>
                   <li class="mb-3"><i class="bi bi-laptop me-2 text-primary"></i> Hình thức: Học qua Video + Thực hành</li>
@@ -74,6 +89,41 @@
         <div class="d-flex">
           <div class="toast-body fw-bold fs-6"><i class="bi bi-check-circle-fill me-2"></i> Đã thêm khóa học vào giỏ hàng!</div>
           <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+      <div class="offcanvas-header border-bottom">
+        <h5 class="offcanvas-title fw-bold" id="cartOffcanvasLabel">Giỏ hàng của bạn</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body d-flex flex-column" id="cartBody">
+        <div class="text-center text-muted mt-5" id="emptyCartMsg">
+          <i class="bi bi-cart-x fs-1 mb-3 d-block"></i>
+          <p>Giỏ hàng đang trống.</p>
+        </div>
+      </div>
+      <div class="offcanvas-footer p-4 border-top bg-light">
+        <div class="d-flex justify-content-between fw-bold fs-5 mb-3">
+          <span>Tổng cộng:</span>
+          <span id="cartTotal" class="text-danger">0 ₫</span>
+        </div>
+        <button class="btn btn-primary w-100 rounded-pill py-2 custom-neumorphism-btn interactive-cursor">Tiến hành Thanh toán</button>
+      </div>
+    </div>
+
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100; margin-top: 60px">
+      <div id="cartToast" class="toast align-items-center text-bg-success border-0 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+        <div class="d-flex">
+          <div class="toast-body fw-bold fs-6"><i class="bi bi-check-circle-fill me-2"></i> Đã thêm vào giỏ hàng!</div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
+      </div>
+
+      <div id="cartWarningToast" class="toast align-items-center text-bg-warning border-0 shadow-lg mt-2" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+        <div class="d-flex">
+          <div class="toast-body fw-bold fs-6 text-dark"><i class="bi bi-exclamation-triangle-fill me-2"></i> Khóa học đã có trong giỏ!</div>
+          <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"></button>
         </div>
       </div>
     </div>
