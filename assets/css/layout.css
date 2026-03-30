@@ -1,0 +1,22 @@
+.navbar-custom {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: rgba(0, 0, 0, 0.85); /* Tối màu để dễ đọc text */
+  transition: background-color 0.3s ease;
+}
+
+/* Fix z-index */
+.custom-z-index-nav {
+  z-index: 1050; /* Đảm bảo luôn nằm trên các nội dung khác */
+}
+
+/* Desktop Sidebar Sticky */
+@media (min-width: 992px) {
+  .sidebar-sticky {
+    position: sticky;
+    top: 100px; /* Cách đỉnh một khoảng bằng Navbar */
+    height: calc(100vh - 100px);
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}

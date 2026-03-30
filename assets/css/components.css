@@ -1,0 +1,158 @@
+/* Custom Cursor cho UX */
+.interactive-cursor {
+  cursor: pointer;
+}
+.help-cursor {
+  cursor: help;
+}
+
+/* Neumorphism nhẹ nhàng cho thẻ khóa học */
+.neumorphism-card {
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow:
+    8px 8px 16px #e6e6e6,
+    -8px -8px 16px #ffffff;
+  transition:
+    transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+    box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.course-card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    12px 12px 24px #d9d9d9,
+    -12px -12px 24px #ffffff;
+}
+
+/* Nút CTA ở Header */
+.custom-neumorphism-btn {
+  box-shadow: 0 4px 15px rgba(238, 9, 121, 0.4);
+  transition: all 0.3s ease;
+}
+.custom-neumorphism-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(238, 9, 121, 0.6);
+}
+
+/* --- BONG BÓNG CHAT ĐA KÊNH --- */
+.chat-widget-container {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1060;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  /* BẮT BUỘC THÊM DÒNG NÀY: Xuyên thấu chuột qua vùng trống */
+  pointer-events: none;
+}
+
+/* Cửa sổ chat chính */
+.chat-window {
+  width: 340px;
+  height: 480px;
+  background: #f8f9fa;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px) scale(0.9);
+  transform-origin: bottom right;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  pointer-events: auto;
+}
+
+.chat-window.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.chat-header {
+  background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);
+}
+
+.chat-body {
+  flex: 1;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* Tùy chỉnh thanh cuộn cho đẹp */
+.chat-body::-webkit-scrollbar {
+  width: 5px;
+}
+.chat-body::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+/* Bong bóng tin nhắn */
+.message-bubble {
+  max-width: 85%;
+  display: inline-block;
+  word-wrap: break-word;
+  font-size: 0.95rem;
+}
+
+/* Tin nhắn của Khách (Bên phải) */
+.user-message {
+  text-align: right;
+}
+.user-message .message-bubble {
+  background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);
+  color: white;
+  border-bottom-right-radius: 0 !important; /* Bo góc nhọn tạo đuôi bong bóng */
+}
+
+/* Tin nhắn của Cửa hàng (Bên trái) */
+.bot-message {
+  text-align: left;
+}
+.bot-message .message-bubble {
+  border-bottom-left-radius: 0 !important;
+}
+
+/* Nút toggle bong bóng */
+.chat-toggle-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);
+  border: none;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease;
+  pointer-events: auto;
+}
+.chat-toggle-btn:hover {
+  transform: scale(1.05);
+}
+
+@keyframes chatPopUp {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.2) translateY(-10px);
+  }
+  50% {
+    transform: scale(0.9) translateY(5px);
+  }
+  70% {
+    transform: scale(1.1) translateY(-5px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+
+.chat-pop-animation .chat-toggle-btn {
+  animation: chatPopUp 1s cubic-bezier(0.25, 0.8, 0.25, 1);
+}

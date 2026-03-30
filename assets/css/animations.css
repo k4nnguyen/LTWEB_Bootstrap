@@ -1,0 +1,71 @@
+/* Định nghĩa animation trượt lên và rõ dần */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Class tiện ích để gắn vào các phần tử cần hiệu ứng */
+.animate-fade-up {
+  animation: fadeInUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  opacity: 0; /* Ẩn trước khi animation chạy */
+}
+
+/* Delay cho từng phần tử để tạo hiệu ứng lượn sóng (stagger) */
+.delay-100 {
+  animation-delay: 0.1s;
+}
+.delay-200 {
+  animation-delay: 0.2s;
+}
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+/* Transition mượt mà cho Sidebar Item */
+.list-group-item {
+  transition: all 0.2s ease-in-out;
+  border-left: 3px solid transparent;
+}
+
+.list-group-item:hover,
+.list-group-item.active {
+  background-color: #f8f9fa;
+  color: #ee0979; /* Màu gradient đặc trưng của One Page Wonder */
+  border-left: 3px solid #ee0979;
+  font-weight: 600;
+}
+
+/* --- ANIMATION CHO HERO BANNER --- */
+@keyframes textSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-title-animate {
+  opacity: 0;
+  animation: textSlideUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.hero-subtitle-animate {
+  opacity: 0;
+  animation: textSlideUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation-delay: 0.3s; /* Trễ hơn tiêu đề một chút */
+}
+
+.hero-btn-animate {
+  opacity: 0;
+  animation: textSlideUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation-delay: 0.6s; /* Trễ nhất */
+}
