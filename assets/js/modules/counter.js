@@ -35,13 +35,16 @@ export function initCounter() {
   // Dùng Observer để kích hoạt đếm số KHI NGƯỜI DÙNG CUỘN ĐẾN NƠI
   const observer = new IntersectionObserver(
     (entries, observerInstance) => {
-      if (entries[0].isIntersecting) {
-        runCounter();
-        observerInstance.disconnect(); // Chạy 1 lần rồi ngắt để không bị chạy lại
-      }
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          console.log("Đã cuộn tới phần Review, kích hoạt đếm số!"); // Dòng log này để test
+          runCounter();
+          observerInstance.disconnect(); // Chạy 1 lần rồi ngắt
+        }
+      });
     },
-    { threshold: 0.3 },
-  ); // Cuộn được 30% section thì kích hoạt
+    { threshold: 0.1 }, // ĐỔI TỪ 0.3 THÀNH 0.1
+  );
 
   observer.observe(reviewsSection);
 }
