@@ -1,3 +1,4 @@
+// Live Search
 export function initSearch(coursesData, renderCoursesFn) {
   const searchInput = document.getElementById("searchInput");
 

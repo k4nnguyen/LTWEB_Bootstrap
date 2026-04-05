@@ -9,33 +9,40 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
 
+    <!-- Nhúng các module trong folder css  -->
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="stylesheet" href="assets/css/layout.css" />
     <link rel="stylesheet" href="assets/css/components.css" />
   </head>
-  <body class="bg-light d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom bg-black fixed-top custom-z-index-nav shadow-sm">
+
+  <body>
+    <!-- Nav bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black shadow-sm fixed-top navbar-custom">
       <div class="container px-5">
-        <a class="navbar-brand fw-bold" href="index.html">AnKhoaHoc</a>
+        <a class="navbar-brand" href="index.html">AnKhoaHoc</a>
+        <!-- Phần button khi màn hình nhỏ sẽ hiện ra -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
           <span class="navbar-toggler-icon"></span>
         </button>
+
+        <!-- Phần menu được ẩn đi (bấm nút mới hiện)-->
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item"><a class="nav-link interactive-cursor" href="index.html">Trang chủ</a></li>
             <li class="nav-item"><a class="nav-link interactive-cursor" href="index.html#courses">Khóa học</a></li>
             <li class="nav-item"><a class="nav-link interactive-cursor" href="index.html#about">Giới thiệu</a></li>
-
+            <!-- Nút hiển thị sáng / tối, sử dụng js để đổi -->
             <li class="nav-item d-flex align-items-center ms-lg-3">
               <button class="btn btn-link nav-link text-white interactive-cursor p-0" id="themeToggleBtn" title="Giao diện Sáng/Tối">
                 <i class="bi bi-moon-fill fs-5" id="themeIcon"></i>
               </button>
             </li>
-
-            <li class="nav-item d-flex align-items-center ms-lg-3 mt-3 mt-lg-0">
+            <!-- Nút giỏ hàng  -->
+            <li class="nav-item d-flex align-items-center ms-lg-3">
               <button class="btn btn-link nav-link text-white position-relative interactive-cursor p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
                 <i class="bi bi-cart3 fs-5"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cartBadge" style="font-size: 0.6rem">0</span>
+                <!-- Chỉnh top - 0 và translate middle để dịch lên góc phải trên  -->
+                <span class="position-absolute top-0 translate-middle badge rounded-pill bg-danger" id="cartBadge" style="font-size: 0.6rem">0</span>
               </button>
             </li>
           </ul>
@@ -43,37 +50,52 @@
       </div>
     </nav>
 
+    <!-- Phần content  -->
     <section class="py-5 mt-5" id="detail-section">
       <div class="container px-5 mt-4">
+        <!-- Phần đường dẫn phân cấp  -->
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html" class="text-decoration-none text-danger">Khóa học</a></li>
             <li class="breadcrumb-item active" aria-current="page" id="bread-category">Đang tải...</li>
           </ol>
         </nav>
-
+        <!-- Chứa các phần content ở trong courses.js  -->
         <div class="row gx-5" id="course-content-wrapper">
           <div class="col-lg-8">
             <span class="badge bg-secondary mb-2" id="detail-category">Category</span>
             <h1 class="fw-bold mb-3" id="detail-title">Đang tải dữ liệu khóa học...</h1>
-            <p class="lead text-muted mb-4" id="detail-desc">Vui lòng đợi trong giây lát.</p>
-
+            <p class="lead mb-4" id="detail-desc">Vui lòng đợi trong giây lát.</p>
+            <div id="courseCarousel" class="carousel slide mb-5 rounded-4 overflow-hidden shadow-sm" data-bs-ride="carousel">
+              <div class="carousel-indicators" id="carousel-indicators"></div>
+              <div class="carousel-inner" id="carousel-inner"></div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#courseCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#courseCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+            <h4 class="fw-bold mb-3 border-bottom pb-2">Tổng quan khóa học</h4>
+            <div class="text-muted mb-5" id="detail-full-desc" style="line-height: 1.8">Đang tải thông tin chi tiết...</div>
             <h4 class="fw-bold mt-5 mb-3 border-bottom pb-2">Nội dung bạn sẽ học</h4>
             <ul class="list-group list-group-flush mb-5 shadow-sm rounded" id="detail-syllabus">
-              <li class="list-group-item text-muted">Đang tải nội dung...</li>
+              <li class="list-group-item">Đang tải nội dung...</li>
             </ul>
           </div>
 
+          <!-- Giá khóa học -->
           <div class="col-lg-4">
             <div class="card border-0 shadow-lg rounded-4">
               <div class="card-body p-4 text-center">
                 <h3 class="fw-bold text-danger mb-3" id="detail-price">Đang tải...</h3>
-
                 <button class="btn btn-primary btn-lg rounded-pill w-100 mb-3 custom-neumorphism-btn interactive-cursor" id="addToCartBtn">Đăng ký học ngay</button>
                 <p class="text-muted small mb-0"><i class="bi bi-shield-check me-1 text-success"></i> Cam kết chất lượng chuẩn kỹ sư</p>
               </div>
-              <div class="card-footer bg-white p-4 border-top bg-transparent">
-                <ul class="list-unstyled mb-0 small text-muted">
+              <div class="card-footer p-4 border-top bg-transparent">
+                <ul class="list-unstyled mb-0 small">
                   <li class="mb-3"><i class="bi bi-clock me-2 text-primary"></i> Thời lượng: <span id="detail-duration" class="fw-semibold text-dark">...</span></li>
                   <li class="mb-3"><i class="bi bi-laptop me-2 text-primary"></i> Hình thức: Học qua Video + Thực hành</li>
                   <li><i class="bi bi-infinity me-2 text-primary"></i> Sở hữu trọn đời</li>
@@ -84,25 +106,21 @@
         </div>
       </div>
     </section>
-    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100; margin-top: 60px">
-      <div id="cartToast" class="toast align-items-center text-bg-success border-0 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="2000">
-        <div class="d-flex">
-          <div class="toast-body fw-bold fs-6"><i class="bi bi-check-circle-fill me-2"></i> Đã thêm khóa học vào giỏ hàng!</div>
-          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-      </div>
-    </div>
+
+    <!-- Phần offcanvas hiển thị giỏ hàng  -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
       <div class="offcanvas-header border-bottom">
         <h5 class="offcanvas-title fw-bold" id="cartOffcanvasLabel">Giỏ hàng của bạn</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
+      <!-- Phần body của cart  -->
       <div class="offcanvas-body d-flex flex-column" id="cartBody">
-        <div class="text-center text-muted mt-5" id="emptyCartMsg">
+        <div class="text-center mt-5" id="emptyCartMsg">
           <i class="bi bi-cart-x fs-1 mb-3 d-block"></i>
           <p>Giỏ hàng đang trống.</p>
         </div>
       </div>
+      <!-- Phần footer của cart  -->
       <div class="offcanvas-footer p-4 border-top bg-light">
         <div class="d-flex justify-content-between fw-bold fs-5 mb-3">
           <span>Tổng cộng:</span>
@@ -112,6 +130,7 @@
       </div>
     </div>
 
+    <!-- Các phần thông báo hiển thị  -->
     <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100; margin-top: 60px">
       <div id="cartToast" class="toast align-items-center text-bg-success border-0 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
         <div class="d-flex">
@@ -127,20 +146,22 @@
         </div>
       </div>
     </div>
+
+    <!-- Phần footer giống trang chủ  -->
     <footer class="py-5 bg-black mt-auto">
-      <div class="container px-5">
-        <div class="row gx-5 text-white mb-4">
-          <div class="col-lg-4 mb-4 mb-lg-0">
+      <div class="container-fluid px-4 px-lg-5">
+        <div class="row gx-4 text-white mb-4">
+          <div class="col-lg-3 mb-4 mb-lg-0">
             <h4 class="fw-bold mb-3">AnKhoaHoc</h4>
             <p class="text-white-50 small">Nền tảng học tập trực tuyến chuẩn kỹ sư. Cam kết mang lại giá trị thực chiến, giúp bạn tự tin bước vào thế giới công nghệ.</p>
             <div class="d-flex gap-3 mt-4">
-              <a href="#" class="text-white-50 text-decoration-none interactive-cursor"><i class="bi bi-facebook fs-5"></i></a>
-              <a href="#" class="text-white-50 text-decoration-none interactive-cursor"><i class="bi bi-youtube fs-5"></i></a>
-              <a href="#" class="text-white-50 text-decoration-none interactive-cursor"><i class="bi bi-github fs-5"></i></a>
+              <a href="https://www.facebook.com/khoa.hoc.hay.866100" class="text-white-50 text-decoration-none interactive-cursor"><i class="bi bi-facebook fs-5"></i></a>
+              <a href="https://www.youtube.com/@H%C6%B0ngDIY" class="text-white-50 text-decoration-none interactive-cursor"><i class="bi bi-youtube fs-5"></i></a>
+              <a href="https://github.com/k4nnguyen" class="text-white-50 text-decoration-none interactive-cursor"><i class="bi bi-github fs-5"></i></a>
             </div>
           </div>
 
-          <div class="col-lg-4 mb-4 mb-lg-0">
+          <div class="col-lg-3 mb-4 mb-lg-0">
             <h5 class="fw-bold mb-3">Liên hệ</h5>
             <ul class="list-unstyled text-white-50 small">
               <li class="mb-3 d-flex">
@@ -153,14 +174,14 @@
               </li>
               <li class="mb-3 d-flex">
                 <i class="bi bi-telephone-fill text-danger me-3 fs-6"></i>
-                <span>0123 456 789</span>
+                <span>0916 365 989</span>
               </li>
             </ul>
           </div>
 
-          <div class="col-lg-4">
+          <div class="col-lg-3 mb-4 mb-lg-0">
             <h5 class="fw-bold mb-3">Bản đồ</h5>
-            <div class="ratio ratio-16x9 rounded-3 overflow-hidden shadow-sm map-container interactive-cursor">
+            <div class="ratio ratio-4x3 rounded-3 overflow-hidden shadow-sm map-container interactive-cursor">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.292513284013!2d105.78486297584168!3d20.980908480656363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135accdd8a1ad71%3A0xa2f9b16036648187!2zSOG7jWMgdmnhu4duIENwbmcgbmdo4buHIELGsHUgY2jDrW5oIFZp4buFbiB0aMO0bmc!5e0!3m2!1svi!2s!4v1711876543210!5m2!1svi!2s"
                 style="border: 0"
@@ -170,20 +191,34 @@
               ></iframe>
             </div>
           </div>
+
+          <div class="col-lg-3">
+            <h5 class="fw-bold mb-3">Facebook</h5>
+            <div class="rounded-3 overflow-hidden shadow-sm bg-white">
+              <iframe
+                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fkhoahocgiaree&tabs=timeline&width=340&height=250&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
+                width="100%"
+                height="250"
+                style="border: none; overflow: hidden"
+                scrolling="no"
+                frameborder="0"
+                allowfullscreen="true"
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+              >
+              </iframe>
+            </div>
+          </div>
         </div>
 
         <div class="border-top border-secondary pt-4 text-center">
-          <p class="m-0 text-white-50 small">Copyright &copy; AnKhoaHoc 2026. All rights reserved.</p>
+          <p class="m-0 text-white-50 small">Copyright © AnKhoaHoc 2026. All rights reserved.</p>
         </div>
       </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
     <script type="module" src="assets/js/detail.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="assets/js/main.js"></script>
-
+    <!-- Nhung API Tawk To -->
     <script type="text/javascript">
       var Tawk_API = Tawk_API || {},
         Tawk_LoadStart = new Date();

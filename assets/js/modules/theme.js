@@ -1,5 +1,4 @@
-// assets/js/modules/theme.js
-
+// Thực hiện đổi theme sáng / tối
 export function initThemeToggle() {
   const themeToggleBtn = document.getElementById("themeToggleBtn");
   const themeIcon = document.getElementById("themeIcon");

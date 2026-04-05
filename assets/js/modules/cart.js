@@ -22,7 +22,7 @@ export function renderCart() {
 
   if (!cartBody || !cartBadge) return;
 
-  // Cập nhật số lượng trên Navbar
+  // Cập nhật số lượng hàng đã mua trên Navbar
   cartBadge.textContent = cart.length;
 
   if (cart.length === 0) {

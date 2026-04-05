@@ -1,3 +1,4 @@
+// Đếm số lượng người sử dụng
 export function initCounter() {
   const counterElement = document.getElementById("studentCounter");
   const reviewsSection = document.getElementById("reviews");
@@ -32,18 +33,18 @@ export function initCounter() {
     requestAnimationFrame(animationStep);
   };
 
-  // Dùng Observer để kích hoạt đếm số KHI NGƯỜI DÙNG CUỘN ĐẾN NƠI
+  // Dùng Observer để kích hoạt đếm số khi người dùng cuộn đến
   const observer = new IntersectionObserver(
     (entries, observerInstance) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          console.log("Đã cuộn tới phần Review, kích hoạt đếm số!"); // Dòng log này để test
+          console.log("Đã cuộn tới phần Review, kích hoạt đếm số!"); // Dòng log test
           runCounter();
           observerInstance.disconnect(); // Chạy 1 lần rồi ngắt
         }
       });
     },
-    { threshold: 0.1 }, // ĐỔI TỪ 0.3 THÀNH 0.1
+    { threshold: 0.1 },
   );
 
   observer.observe(reviewsSection);

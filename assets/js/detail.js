@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initThemeToggle();
   initCart();
 
-  // 1. Lấy ID từ URL
+  // Lấy ID từ URL
   const urlParams = new URLSearchParams(window.location.search);
   const idParam = urlParams.get("id");
 
@@ -18,11 +18,11 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // 2. Ép kiểu ID sang dạng số và tìm trong mảng data
+  // Ép kiểu ID sang dạng số và tìm trong mảng data
   const courseId = parseInt(idParam, 10);
   const courseDetail = coursesData.find((course) => course.id === courseId);
 
-  // 3. Render dữ liệu ra giao diện hoặc báo lỗi nếu không tìm thấy
+  //  Render dữ liệu ra giao diện hoặc báo lỗi nếu không tìm thấy
   if (courseDetail) {
     // Cập nhật thẻ HTML bằng dữ liệu thật
     document.getElementById("detail-title").textContent = courseDetail.title;
@@ -35,10 +35,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("bread-category").textContent = courseDetail.category;
     document.title = `${courseDetail.title} - AnKhoaHoc`;
 
-    // 1. Xử lý Thời lượng
+    // Xử lý Thời lượng
     document.getElementById("detail-duration").textContent = courseDetail.duration || "Chưa cập nhật";
 
-    // 2. Xử lý Giá tiền (Format VNĐ)
+    // Xử lý Giá tiền (Format VNĐ)
     const priceElement = document.getElementById("detail-price");
     if (courseDetail.price === 0) {
       priceElement.textContent = "Miễn phí";
@@ -51,6 +51,44 @@ document.addEventListener("DOMContentLoaded", () => {
       priceElement.textContent = "Liên hệ";
     }
 
+    // Xử lý Tổng quan chi tiết
+    const fullDescElement = document.getElementById("detail-full-desc");
+    if (fullDescElement) {
+      // Dùng innerHTML vì dữ liệu fullDesc chứa các thẻ HTML (<p>, <b>...)
+      fullDescElement.innerHTML = courseDetail.fullDesc || "Chưa có thông tin chi tiết cho khóa học này.";
+    }
+
+    // Xử lý Render Slider Ảnh (Carousel)
+    const carouselContainer = document.getElementById("courseCarousel");
+    const carouselInner = document.getElementById("carousel-inner");
+    const carouselIndicators = document.getElementById("carousel-indicators");
+
+    if (carouselContainer && carouselInner && carouselIndicators) {
+      // Kiểm tra nếu mảng images tồn tại và có ảnh
+      if (courseDetail.images && courseDetail.images.length > 0) {
+        let innerHTML = "";
+        let indicatorsHTML = "";
+
+        courseDetail.images.forEach((imgSrc, index) => {
+          const activeClass = index === 0 ? "active" : "";
+
+          // Render Nút gạch ngang bên dưới ảnh
+          indicatorsHTML += `<button type="button" data-bs-target="#courseCarousel" data-bs-slide-to="${index}" class="${activeClass}" aria-current="${index === 0 ? "true" : "false"}" aria-label="Slide ${index + 1}"></button>`;
+
+          // Render Ảnh
+          innerHTML += `
+                    <div class="carousel-item ${activeClass}">
+                        <img src="${imgSrc}" class="d-block w-100" style="object-fit: cover; height: 450px;" alt="Hình ảnh khóa học ${index + 1}">
+                    </div>`;
+        });
+
+        carouselIndicators.innerHTML = indicatorsHTML;
+        carouselInner.innerHTML = innerHTML;
+        carouselContainer.style.display = "block"; // Hiện Carousel
+      } else {
+        carouselContainer.style.display = "none"; // Ẩn Carousel nếu khóa học không có ảnh
+      }
+    }
     // 3. Xử lý Render Syllabus (Danh sách nội dung học)
     const syllabusContainer = document.getElementById("detail-syllabus");
     if (courseDetail.syllabus && courseDetail.syllabus.length > 0) {
@@ -69,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
       syllabusContainer.innerHTML = `<li class="list-group-item text-muted">Nội dung đang được cập nhật.</li>`;
     }
 
-    // === LOGIC XỬ LÝ NÚT THÊM VÀO GIỎ HÀNG ===
+    // LOGIC XỬ LÝ NÚT THÊM VÀO GIỎ HÀNG
     const addToCartBtn = document.getElementById("addToCartBtn");
     if (addToCartBtn) {
       addToCartBtn.addEventListener("click", () => {
